@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -37,15 +38,16 @@ func main() {
 	if err = scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
-	maxS := 0
+
+	sumOf := []int{}
 	for i := range list {
 		s := 0
 		for j := range list[i] {
 			s += list[i][j]
 		}
-		if s > maxS {
-			maxS = s
-		}
+		sumOf = append(sumOf, s)
 	}
-	fmt.Println(maxS)
+	sort.Ints(sumOf)
+	n, n1, n2 := len(sumOf)-1, len(sumOf)-2, len(sumOf)-3
+	fmt.Println(sumOf[n] + sumOf[n1] + sumOf[n2])
 }
